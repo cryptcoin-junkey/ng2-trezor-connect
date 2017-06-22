@@ -1,0 +1,42 @@
+{
+  "name": "ng2-trezor-connect",
+  "version": "0.0.1",
+  "description": "Trezor Connect as Angular2 Service.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "",
+    "prepublish": "ngc",
+    "build": "ngc",
+    "pack": "npm pack ../",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-dummy": "tslint *.ts && ngc && karma start",
+    "ngc": "ngc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cryptcoin-junkey/ng2-trezor-connect.git"
+  },
+  "keywords": [
+    "Trezor",
+    "Angular"
+  ],
+  "author": "Cryptcoin Junkey <cryptcoin.junkey@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cryptcoin-junkey/ng2-trezor-connect/issues"
+  },
+  "homepage": "https://github.com/cryptcoin-junkey/ng2-trezor-connect#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@angular/common": "^2.4.9",
+    "@angular/compiler": "^2.4.9",
+    "@angular/compiler-cli": "^2.4.9",
+    "@angular/core": "^2.4.9",
+    "@angular/platform-browser": "^2.4.9",
+    "@angular/platform-server": "^2.4.9",
+    "@types/node": "^6.0.54",
+    "rxjs": "^5.1.0",
+    "typescript": "2.0.10",
+    "zone.js": "^0.7.6"
+  }
+}
