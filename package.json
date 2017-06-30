@@ -1,6 +1,6 @@
 {
   "name": "ng2-trezor-connect",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Trezor Connect as Angular2 Service.",
   "main": "index.js",
   "scripts": {
