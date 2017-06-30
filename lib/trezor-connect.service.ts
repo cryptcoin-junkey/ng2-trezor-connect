@@ -61,6 +61,11 @@ export declare interface TxOutputType {
   op_return_data: string
 };
 
+export declare interface Recipient {
+  address: string,
+  amount: number
+};
+
 @Injectable()
 export class TrezorConnectService {
   private _trezorConnect: any;
@@ -96,7 +101,7 @@ export class TrezorConnectService {
   
   /**
    * Retrieves BIP32 extended public key by path.
-   * 
+   *
    * @param path
    * @returns {Observable<T>}
    */
@@ -169,4 +174,115 @@ export class TrezorConnectService {
 
     return subject.asObservable();
   }
+
+  /**
+   * Requests a payment from the user's wallet
+   * to a set of given recipients.
+   *
+   * @param recipents
+   * @returns {Observable<T>}
+   */
+  public composeAndSignTx(
+    recipients: Recipient[]) {
+    let subject = new Subject();
+
+    this._trezorConnect.composeAndSignTx(recipients,
+      result => {
+        if (result.success) {
+          subject.next(result);
+        } else {
+          subject.error(result);
+        }
+      });
+
+    return subject.asObservable();
+  }
+
+  /**
+   * Asks device to sign a message using the private key
+   * derived by given BIP32 path.
+   *
+   * @param path
+   * @param message
+   * @returns {Observable<T>}
+   */
+  public signMessage(
+    path: string,
+    message: string) {
+    let subject = new Subject();
+
+    this._trezorConnect.signMessage(path, message,
+      result => {
+        if (result.success) {
+          subject.next(result);
+        } else {
+          subject.error(result);
+        }
+      });
+
+    return subject.asObservable();
+  }
+
+  /**
+   * Asks device to encrypt value using the private key
+   * derived by given BIP32 path and the given key.
+   *
+   * @param path
+   * @param key
+   * @param value
+   * @param encrypt
+   * @param ask_on_encrypt
+   * @param ask_on_decrypt
+   * @returns {Observable<T>}
+   */
+  public chpherKeyValue(
+    path: string,
+    key: string,
+    value: string,
+    encrypt: boolean,
+    ask_on_encrypt: boolean,
+    ask_on_decrypt: boolean) {
+    let subject = new Subject();
+
+    this._trezorConnect.cipherKeyValue(
+      path,
+      key,
+      value,
+      encrypt,
+      ask_on_encrypt,
+      ask_on_decrypt,
+      result => {
+        if (result.success) {
+          subject.next(result);
+        } else {
+          subject.error(result);
+        }
+      });
+
+    return subject.asObservable();
+  }
+
+  /**
+   * Gets an info of an account.
+   *
+   * @param description
+   * @returns {Observable<T>}
+   */
+  public getAccountInfo(
+    description: string) {
+    let subject = new Subject();
+
+    this._trezorConnect.getAccountInfo(
+      description,
+      result => {
+        if (result.success) {
+          subject.next(result);
+        } else {
+          subject.error(result);
+        }
+      });
+
+    return subject.asObservable();
+  }
+
 }
